@@ -8,9 +8,6 @@ struct FilterView: View {
     @EnvironmentObject var viewModel: ListViewModel
     @Environment(\.presentationMode) var presentationMode
     
-    //MARK: - Init
-    
-    
     //MARK: - Body
     
     var body: some View {
@@ -33,7 +30,6 @@ struct FilterView: View {
             .padding(.vertical, 24)
             .padding(.horizontal, 20)
         }
-        
     }
 }
 

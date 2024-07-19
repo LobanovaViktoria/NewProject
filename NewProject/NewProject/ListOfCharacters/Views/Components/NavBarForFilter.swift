@@ -1,10 +1,3 @@
-//
-//  NavBarForFilter.swift
-//  NewProject
-//
-//  Created by Viktoria Lobanova on 19.07.2024.
-//
-
 import SwiftUI
 
 struct NavBarForFilter: View {

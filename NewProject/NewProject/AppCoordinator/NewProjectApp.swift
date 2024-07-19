@@ -3,11 +3,15 @@ import SwiftUI
 @main
 struct NewProjectApp: App {
     
+    // MARK: - Properties
+    
     @AppStorage("shouldShowSplash") var shouldShowSplash: Bool = true
     @ObservedObject var coordinator = BaseCoordinator()
     @StateObject var listViewModel = ListViewModel()
     @State private var launcher = AppLauncher()
     @State var detentHeight: CGFloat = 0
+    
+    // MARK: - Body
     
     var body: some Scene {
         WindowGroup {
@@ -23,6 +27,8 @@ struct NewProjectApp: App {
             }
         }
     }
+    
+    // MARK: - Methods
     
     @ViewBuilder
     private func bodyContentView(

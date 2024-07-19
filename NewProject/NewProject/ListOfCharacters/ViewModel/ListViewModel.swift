@@ -22,11 +22,15 @@ final class ListViewModel: ObservableObject {
     private let episodeDataService: EpisodeDataService
     private var cancellables = Set<AnyCancellable>()
     
+    // MARK: - Init
+    
     init() {
         self.characterDataService = CharactersDataService()
         self.episodeDataService = EpisodeDataService()
         addSubscribers()
     }
+    
+    // MARK: - Methods
     
     func statusChange(item: Status) {
         if item == selectedStatus {
@@ -64,21 +68,6 @@ final class ListViewModel: ObservableObject {
         characterDataService.searchTextUpdated(searchText: searchText)
     }
     
-    private func addSubscribers() {
-        characterDataService.$allCharacters
-            .sink { [weak self] allCharacters in
-                self?.characters = allCharacters
-            }
-            .store(in: &cancellables)
-        
-        characterDataService.$isBusy
-            .sink { [weak self] isBusy in
-                self?.isBusy = isBusy
-            }
-            .store(in: &cancellables)
-        state = characterDataService.state
-    }
-    
     func loadNextPage() {
         characterDataService.loadNextPage()
         state = characterDataService.state
@@ -89,12 +78,12 @@ final class ListViewModel: ObservableObject {
     }
     
     func updateEpisodes() {
-        self.episodesID = []
-        self.selectedCharacter = nil
-        self.episodes = []
-        self.stringFromEpisodes = ""
-        self.episodesName = []
-        self.episodeDataService.updateEpisodes()
+        episodesID = []
+        selectedCharacter = nil
+        episodes = []
+        stringFromEpisodes = ""
+        episodesName = []
+        episodeDataService.updateEpisodes()
     }
     
     func getEpisodes() {
@@ -128,5 +117,24 @@ final class ListViewModel: ObservableObject {
             str.append(name)
         }
         return str
+    }
+    
+    private func addSubscribers() {
+        characterDataService.$allCharacters
+            .sink { [weak self] allCharacters in
+                self?.characters = allCharacters
+            }
+            .store(in: &cancellables)
+        
+        characterDataService.$isBusy
+            .sink { [weak self] isBusy in
+                self?.isBusy = isBusy
+            }
+            .store(in: &cancellables)
+        characterDataService.$state
+            .sink { [weak self] state in
+                self?.state = state
+            }
+            .store(in: &cancellables)
     }
 }

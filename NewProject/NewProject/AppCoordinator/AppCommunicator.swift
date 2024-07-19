@@ -1,5 +1,14 @@
 import SwiftUI
 
+// MARK: - protocol CharactersNavigator
+
+protocol CharactersNavigator {
+    func characterDetail()
+    func filters()
+}
+
+// MARK: - BaseCoordinator
+
 final class BaseCoordinator: ObservableObject {
     @Published var path = NavigationPath()
     @Published var presentSheetItem: DestinationFlowPage?
@@ -14,10 +23,7 @@ final class BaseCoordinator: ObservableObject {
     }
 }
 
-protocol CharactersNavigator {
-    func characterDetail()
-    func filters()
-}
+// MARK: - extension BaseCoordinator
 
 extension BaseCoordinator: CharactersNavigator {
     func filters() {
@@ -28,6 +34,8 @@ extension BaseCoordinator: CharactersNavigator {
         path.append(DestinationFlowPage.characterDetail)
     }
 }
+
+// MARK: - enum DestinationFlowPage
 
 enum DestinationFlowPage: Hashable, Identifiable {
     static func == (
@@ -55,10 +63,4 @@ enum DestinationFlowPage: Hashable, Identifiable {
             hasher.combine("filter")
         }
     }
-}
-
-protocol AnyDataModel {
-    var data: Any? { get set }
-    var index: Int? { get set }
-    var id: String? { get set }
 }

@@ -2,7 +2,9 @@ import Foundation
 import Combine
 
 class NetworkingManager {
-  
+    
+    // MARK: - enum NetworkingError
+    
     enum NetworkingError: LocalizedError, Equatable {
         case badURLResponse(url: URL)
         case resultIsEmpty
@@ -10,15 +12,19 @@ class NetworkingManager {
         
         var errorDescription: String? {
             switch self {
-            case .badURLResponse(url: let url): return "Bad response from URL: \(url)"
-            case .unknown: return "Unknown error occurred"
-            case .resultIsEmpty: return "There is nothing here"
+            case .badURLResponse(url: let url):
+                "Bad response from URL: \(url)"
+            case .unknown:
+                "Unknown error occurred"
+            case .resultIsEmpty:
+                "There is nothing here"
             }
         }
     }
     
+    // MARK: - Methods
+    
     static func download(url: URL) -> AnyPublisher<Data, Error> {
-        
         return URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .default))
             .tryMap({
@@ -28,7 +34,10 @@ class NetworkingManager {
             .eraseToAnyPublisher()
     }
     
-    static func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
+    static func handleURLResponse(
+        output: URLSession.DataTaskPublisher.Output,
+        url: URL
+    ) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300 else {
             if (output.response as? HTTPURLResponse)?.statusCode == 404 {

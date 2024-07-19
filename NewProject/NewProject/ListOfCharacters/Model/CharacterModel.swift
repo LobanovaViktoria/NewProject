@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - struct CharactersResponse
+
 struct CharactersResponse: Codable {
     let info: Info
     let results: [CharacterModel]
@@ -8,6 +10,8 @@ struct CharactersResponse: Codable {
     case info, results
     }
 }
+
+// MARK: - struct Info
 
 struct Info: Codable {
     let count, pages: Int
@@ -18,6 +22,8 @@ struct Info: Codable {
         case count, pages, next, prev
     }
 }
+
+// MARK: - struct CharacterModel
 
 struct CharacterModel: Identifiable, Codable, Equatable {
     let id: Int
@@ -48,6 +54,8 @@ struct CharacterModel: Identifiable, Codable, Equatable {
     }
 }
 
+// MARK: - struct Episode
+
 struct Episode: Identifiable, Codable {
     let id: Int
     let name: String
@@ -57,10 +65,14 @@ struct Episode: Identifiable, Codable {
     }
 }
 
+// MARK: - struct Location
+
 struct Location: Codable, Equatable {
     let name: String?
     let url: String?
 }
+
+// MARK: - enums
 
 enum Gender: String, Codable {
     case female = "Female"
