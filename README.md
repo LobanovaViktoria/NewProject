@@ -2,7 +2,7 @@
 
 # Ссылки
 
-Дизайн в Figma - [посмотреть](https://tinyurl.com/image-feed-figma)   
+Дизайн в Figma - [посмотреть](https://www.figma.com/design/pItXdbTwIeswZksyvGZQNH/Итоговое-задание-iOS?node-id=0-1)   
 API - [посмотреть](https://rickandmortyapi.com/documentation/)    
 Скринкаст работы приложения - [посмотреть](https://disk.yandex.ru/i/jWVLphJjx5qh9w)     
 
